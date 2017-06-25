@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://nachoSD/skin/browserOverlay.css" ?>
+<!DOCTYPE overlay SYSTEM "chrome://nachoSD/locale/browserOverlay.dtd">
+
+<overlay id="nachoSD"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<!-- SCRIPT -->
+
+  <script type="application/x-javascript" src="chrome://nachoSD/content/browserOverlay.js" />
+  <script type="application/x-javascript">
+    window.addEventListener( "load", function() { nachoSD.browserOverlay.init(); }, false );
+  </script>
+
+<!-- ITEM -->
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbaritem id="nachoSD_item_box">
+      <textbox id="nachoSD_item_textbox" placeholder="Número incidencia/orden" label="Num CR" type="search" searchbutton="true" oncommand="nachoSD.browserOverlay.openTicket()"/>
+      <checkbox id="nachoSD_item_check" label="Orden" checked="false"/>
+    </toolbaritem>
+  </toolbarpalette>
+
+<!-- CONTEXT -->
+
+  <popup id="contentAreaContextMenu">
+  <menuseparator />
+  <menu id="nacho_SD_context" label="Service Desk" accesskey="k" >
+      <menupopup>
+	  <menuitem id="nachoSD_contextitem_options"
+	    label="Service Desk"
+	    accesskey="k"
+	    oncommand="nachoSD.browserOverlay.openSD()" />
+	  <menuseparator />
+	  <menuitem id="nachoSD_contextitem_new_cr"
+	    label="Nueva Incidencia"
+	    accesskey="N"
+	    oncommand="nachoSD.browserOverlay.newTicket()" />
+	  <menuitem id="nachoSD_contextitem_search_cr"
+	    label="Buscar Incidencia"
+	    accesskey="B"
+	    oncommand="nachoSD.browserOverlay.searchTicket()" />
+	  <menuitem id="nachoSD_contextitem_list_mycr"
+	    label="Mis Incidencias"
+	    accesskey="M"
+	    oncommand="nachoSD.browserOverlay.myTickets()" />
+	  <menuseparator />
+	  <menuitem id="nachoSD_contextitem_options"
+	    accesskey="C"
+	    label="Configurar..." oncommand="window.open( 'chrome://nachoSD/content/options.xul', 'Opciones',
+	  'chrome,centerscreen');"/>
+      </menupopup>
+      </menu>
+  </popup>
+
+
+<!-- MENUBAR -->
+
+  <menubar id="main-menubar">
+    <menu id="nacho_SD_menu" label="Service Desk" accesskey="k" insertbefore="helpMenu">
+      <menupopup>
+	<menuitem id="nachoSD_menuitem_options"
+	    label="Service Desk"
+	    accesskey="k"
+	    oncommand="nachoSD.browserOverlay.openSD()" />
+	<menuseparator />
+        <menuitem id="nachoSD_menuitem_new_cr"
+          label="Nueva Incidencia"
+          accesskey="N"
+          oncommand="nachoSD.browserOverlay.newTicket()" />
+	<menuitem id="nachoSD_menuitem_search_cr"
+          label="Buscar Incidencia"
+          accesskey="B"
+          oncommand="nachoSD.browserOverlay.searchTicket()" />
+        <menuitem id="nachoSD_menuitem_list_mycr"
+          label="Mis Incidencias"
+          accesskey="M"
+          oncommand="nachoSD.browserOverlay.myTickets()" />
+	  <menuseparator />
+	  <menuitem id="nachoSD_menuitem_options"
+	    accesskey="C"
+	    label="Configurar..." oncommand="window.open( 'chrome://nachoSD/content/options.xul', 'Opciones',
+	  'chrome,centerscreen');"/>
+      </menupopup>
+    </menu>
+  </menubar>
+
+</overlay>

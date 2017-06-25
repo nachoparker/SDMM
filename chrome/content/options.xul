@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow id="nachoSD-prefs" title="Nacho SD Opciones" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" windowtype="nachoSDprefWindow">
+
+  <!-- SCRIPT -->
+
+  <script type="application/x-javascript" src="chrome://nachoSD/content/browserOverlay.js" />
+  <script type="application/x-javascript">
+    window.addEventListener( "load", nachoSD.opts.init, false );
+    window.addEventListener( "unload", function() { nachoSD.opts.shutdown(); }, false );
+  </script> 
+  
+  <prefpane label="Nacho SD Opciones">
+
+  <!-- PREFERENCES -->
+
+    <preferences id="nachoSD-preferences">
+      <preference id="nachoSD-tab"   name="extensions.nachoSD.tab"   type="int"/>
+
+      <preference id="nachoSD-serverName" name="extensions.nachoSD.serverName" type="string"/>
+      <preference id="nachoSD-serverIP"   name="extensions.nachoSD.serverIP"   type="string"/>
+      <preference id="nachoSD-serverPort" name="extensions.nachoSD.serverPort" type="string"/>
+      <preference id="nachoSD-user"       name="extensions.nachoSD.user"       type="string"/>
+      <preference id="nachoSD-autologin"  name="extensions.nachoSD.autologin"  type="bool"/>
+
+      <preference id="nachoSD-popupnotif" name="extensions.nachoSD.popupnotif" type="bool"/>
+      <preference id="nachoSD-OSnotif"    name="extensions.nachoSD.OSnotif"    type="bool"/>
+
+      <preference id="nachoSD-factory"  name="extensions.nachoSD.factory" type="string"/>
+      <preference id="nachoSD-atr1" 	name="extensions.nachoSD.query.atr1" type="string"/>
+      <preference id="nachoSD-rel1"  	name="extensions.nachoSD.query.rel1" type="string"/>
+      <preference id="nachoSD-val1"     name="extensions.nachoSD.query.val1" type="string"/>
+      <preference id="nachoSD-act1"    	name="extensions.nachoSD.query.act1" type="bool"/>
+
+      <preference id="nachoSD-FFF"      name="extensions.nachoSD.fff" type="string"/>
+    </preferences>
+
+    <tabbox>
+      <tabs id="nachoSD-tabs" onselect="nachoSD.opts.tabSelected(event)" >
+	<tab label="Servidores" />
+	<tab label="Mis Incidencias" />
+	<tab label="Más" />
+      </tabs>
+      <tabpanels>
+
+	  <!-- SERVIDORES -->
+
+	<tabpanel>
+	<vbox flex="1">
+	  <spacer flex="1"/>
+	  <groupbox flex="1" orient="horizontal" >
+	    <caption label="Servidor"/>
+	    <textbox id="nachoSD-serverName-pref" preference="nachoSD-serverName" flex="1" />
+	    <button label="Guardar" accesskey="G" oncommand="nachoSD.opts.saveServer()"/>
+	    <button label="Borrar"  accesskey="B" oncommand="nachoSD.opts.delServer()"/>
+	  </groupbox>
+	  <hbox>
+	  <groupbox flex="1" >
+	    <caption label="Conexión"/>
+	    <grid>
+	      <columns>
+		<column flex="4"/>
+		<column flex="1"/>
+	      </columns>
+		<rows>
+		  <row>
+		    <label control="nachoSD-serverIP-pref" value="Dirección" />
+		    <textbox id="nachoSD-serverIP-pref" preference="nachoSD-serverIP" oninput="nachoSD.browserOverlay.unSelectServer()"/>
+		  </row>
+		  <row>
+		    <label control="nachoSD-serverPort-pref" value="Puerto"/>
+		    <textbox id="nachoSD-serverPort-pref" preference="nachoSD-serverPort" oninput="nachoSD.browserOverlay.unSelectServer()"/>
+		  </row>
+
+	      </rows>
+	    </grid>
+	  </groupbox>	
+
+	  <groupbox>
+	    <caption label="Cuenta"/>
+	    <grid>
+	      <columns>
+		<column flex="4"/>
+		<column flex="1"/>
+	      </columns>
+		<rows>
+		  <row>
+		    <label control="nachoSD-username-pref" value="Usuario"/>
+		    <textbox disabled="true" id="nachoSD-username-pref" preference="nachoSD-user" oninput="nachoSD.browserOverlay.unSelectServer()"/>
+		  </row>
+		  <row>
+		    <label control="nachoSD-password-pref" value="Contraseña"/>
+		    <textbox disabled="true" id="nachoSD-password-pref" type="password"/>
+		  </row>
+		  <row>
+		    <checkbox label="autologin" id="nachoSD-autologin-pref" preference="nachoSD-autologin" oncommand="nachoSD.opts.disableAutologinFields(this)" oninput="nachoSD.browserOverlay.unSelectServer()" />
+		  </row>
+	      </rows>
+	    </grid>
+	  </groupbox>	
+	  </hbox>	
+	  <listbox id="nachoSD-serv-pref" preference="nachoSD-servlist" onselect="nachoSD.opts.serverSelected(event)" flex="1" >
+
+	    <listhead>
+	      <listheader label="Nombre"/>
+	      <listheader label="Dirección"/>
+	      <listheader label="Usuario"/>
+	    </listhead> 
+	    <listcols>
+	      <listcol flex="1"/>
+	      <listcol flex="1"/>
+	      <listcol flex="1"/>
+	    </listcols>
+
+	  </listbox>
+
+	  </vbox>
+	</tabpanel>
+
+	  <!-- NOTIFICATIONS -->
+
+	<tabpanel orient="vertical">
+	<!--  <groupbox>
+	    <caption label="Método"/>
+	    <grid>
+	      <columns>
+		<column flex="1"/>
+		<column flex="4"/>
+	      </columns>
+		<rows>
+		  <row>
+		    <checkbox label="Globo" preference="nachoSD-popupnotif"/>
+		    <description> Se ven dentro de Firefox </description>
+		  </row>
+		  <row>
+		    <checkbox label="OS popup" checked="true" preference="nachoSD-OSnotif"/>
+		    <description> Se ven aunque no se esté en Firefox (debe estar abierto) </description>
+		  </row>
+		</rows>
+	    </grid>
+	  </groupbox>	-->
+	  <groupbox orient="horizontal" >
+	    <caption label="Búsqueda"/>
+	    <grid>
+	      <columns>
+		<column flex="1"/>
+		<column flex="0"/>
+		<column flex="1"/>
+		<column flex="0"/>
+	      </columns>
+	      <rows id="nachoSD-queryRows">
+		<row id="nachoSD-queryRow0">
+		  <label control="nachoSD-attribute-pref" value="Atributo" />
+		  <label control="nachoSD-rel-pref" value="Relación" />
+		  <label control="nachoSD-value-pref" value="Valor" />
+		  <label control="nachoSD-active-pref" value="Activo" />
+		</row>
+		<row id="nachoSD-queryRow1">
+		  <textbox id="nachoSD-attribute-pref" preference="nachoSD-atr1" oninput="nachoSD.opts.textInput(this)" />
+		  <menulist label="Equals" id="nachoSD-rel-pref" preference="nachoSD-rel1" oncommand="nachoSD.opts.selectInput(this)" >
+		    <menupopup>
+		      <menuitem label="Equals" selected="true" value="QBE.EQ."/>
+		      <menuitem label="Not equals" value="QBE.NE."/>
+		      <menuitem label="Null" value="QBE.NU."/>
+		      <menuitem label="Not null" value="QBE.NN."/>
+		      <menuitem label="IN" value="QBE.IN."/>
+		      <menuitem label="Contains" value="QBE.KY."/>
+		    </menupopup>
+		  </menulist>
+		  <textbox id="nachoSD-value-pref" preference="nachoSD-val1" oninput="nachoSD.opts.textInput(this)" />
+		  <checkbox id="nachoSD-active-pref" preference="nachoSD-act1" oncommand="nachoSD.opts.disableRow(this)" />
+		</row>
+	    </rows>
+	  </grid>
+
+
+	    <grid>
+	      <rows>
+		<row>
+		    <label control="nachoSD-factory-pref" value="Objeto" />
+		</row>
+		<row>
+		    <menulist label="cr" id="nachoSD-factory-pref" preference="nachoSD-factory" >
+		      <menupopup>
+			<menuitem label="cr" selected="true" value="cr" />
+			<menuitem label="chg" value="chg" />
+		      </menupopup>
+		    </menulist>
+		</row>
+	      </rows>
+	  </grid>
+
+	</groupbox>	
+	</tabpanel>
+
+	  <!-- ADVANCED -->
+
+	<tabpanel orient="vertical">
+	  <groupbox flex="1">
+	    <caption label="Servidores Firefox Fix"/>
+	    <spacer flex="1"/>
+	    <textbox id="nachoSD-FFF-pref" preference="nachoSD-FFF" />
+	    <spacer flex="1"/>
+	    <description> (Parte de) URLs adicionales para aplicar el fix. Ejemplo: 10.234.12.164, 10.234.8, servicedesk.es</description>
+	    <description> No es necesario para los servidores de la pestaña "Servidores" </description>
+	</groupbox>	
+	</tabpanel>
+
+      </tabpanels>
+    </tabbox>
+  </prefpane>
+</prefwindow>

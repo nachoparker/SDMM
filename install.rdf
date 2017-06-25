@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>nachoSD@example.org</em:id>
+    <em:name>SDM²</em:name>
+    <em:iconURL>chrome://nachoSD/skin/nachoSDlogo.png</em:iconURL>
+    <em:description>Service Desk Manager Manager</em:description>
+    <em:version>0.7</em:version>
+    <em:creator>Ignacio Núñez Hernanz ( i.nunez.hernanz@accenture.es ) </em:creator>
+    <em:optionsURL>chrome://nachoSD/content/options.xul</em:optionsURL>
+    <em:type>2</em:type>
+
+    <!-- Mozilla Firefox -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>4.0</em:minVersion>
+        <em:maxVersion>8.0a1</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

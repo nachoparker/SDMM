@@ -1,0 +1,5 @@
+content   nachoSD              chrome/content/
+skin      nachoSD  classic/1.0 chrome/skin/
+locale    nachoSD  en-US       chrome/locale/en-US/
+
+overlay chrome://browser/content/browser.xul  chrome://nachoSD/content/browserOverlay.xul
